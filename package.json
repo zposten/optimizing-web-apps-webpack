@@ -11,11 +11,12 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.0.1",
     "karma-jasmine": "^1.1.0",
-    "karma-junit-reporter": "^1.2.0"
+    "karma-junit-reporter": "^1.2.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
   },
   "scripts": {
     "postinstall": "node node_modules/bower/bin/bower install",
-    "prestart": "npm install",
     "start": "http-server -c-1 -o",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
