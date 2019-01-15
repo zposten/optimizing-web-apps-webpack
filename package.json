@@ -13,9 +13,10 @@
     "karma-jasmine": "^1.1.0",
     "karma-junit-reporter": "^1.2.0",
     "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1"
   },
   "scripts": {
+    "build": "webpack app/app.js --output app/dist/app.bundle.js --mode development",
+    "watch": "npm run build -- --watch",
     "postinstall": "node node_modules/bower/bin/bower install",
     "start": "http-server -c-1 -o",
     "pretest": "npm install",
