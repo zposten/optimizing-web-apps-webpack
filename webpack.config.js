@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'development',
@@ -6,7 +7,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'app/dist'),
     filename: 'app.bundle.js',
+    publicPath: '/dist/',
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(), 
+  ],
   // Documented at: https://webpack.js.org/configuration/dev-server/
   devServer: {
     // The root that webpack-dev-server serves files from.  The default is 
@@ -19,5 +24,9 @@ module.exports = {
     // Tell webpack-dev-server to watch files that are not built by webpack
     // but are inside of the content base.
     watchContentBase: true,
+    hot: true,
+    // Tell webpack-dev-server to only perform hot updates, and not to refresh
+    // the page if a hot reload is not possible
+    hotOnly: false,
   }
 }
