@@ -1,32 +1,37 @@
-function Scoring() {
-  "use strict";
+class Scoring {
 
-  this.score = 0;
+  constructor() {
+    this.score = 0;
+  }
 
-  this.newGame = function () {
-    this.score = 1;
-  };
-  this.tableauCardTurnedUp = function () {
+  newGame() {
+    this.score = 0;
+  }
+
+  tableauCardTurnedUp() {
     this.score += 5;
-  };
-  this.dropped = function (source, destionation) {
-    this.score += scoreForMoving(source, destionation) || 0;
-  };
-  this.wasteRecycled = function () {
-    this.score = Math.max(this.score - 100, 0);
-  };
+  }
 
-  function scoreForMoving(source, destionation) {
-    if (destionation.name === "TableauPile") {
-      if (source.name === "FoundationPile") {
-        return -15;
-      }
-      return 5;
+  dropped(source, destination) {
+    this.score += scoreForMoving(source, destination) || 0;
+  }
+
+  wasteRecycled() {
+    this.score = Math.max(this.score - 100, 0);
+  }
+
+}
+
+function scoreForMoving(source, destination) {
+  if (destination.name === "TableauPile") {
+    if (source.name === "FoundationPile") {
+      return -15;
     }
-    if (destionation.name === "FoundationPile") {
-      if (source.name === "TableauPile" || source.name === "WastePile") {
-        return 10;
-      }
+    return 5;
+  }
+  if (destination.name === "FoundationPile") {
+    if (source.name === "TableauPile" || source.name === "WastePile") {
+      return 10;
     }
   }
 }
@@ -52,4 +57,4 @@ if (module.hot) {
 }
 
 angular.module("klondike.scoring", [])
-  .service("scoring", [Scoring]);
+  .factory("scoring", () => new Scoring());
