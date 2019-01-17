@@ -21,6 +21,6 @@ module.exports = {
     //
     // See documentation here:
     // https://babeljs.io/docs/en/babel-preset-env
-    ['@babel/preset-env', {useBuiltIns: 'usage', debug: true}],
+    ['@babel/preset-env', {useBuiltIns: 'usage', debug: false}],
   ],
 }

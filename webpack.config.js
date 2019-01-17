@@ -19,9 +19,16 @@ module.exports = function (env, argv) {
         {
           test: /\.js$/, 
           exclude: /(node_modules|bower_components)/,
-          use: {loader: 'babel-loader'},
+          use: [
+            'tee-loader?label=AFTER', // Older query string syntax
+            {loader: 'babel-loader'},
+            {loader: 'tee-loader', options: {label: 'BEFORE'}}, // Current object syntax
+          ],
         },
       ],
+    },
+    resolveLoader: {
+      alias: {'tee-loader': path.resolve(__dirname, 'tee-loader.js')}
     },
     plugins: [
       isDev ? new webpack.HotModuleReplacementPlugin() : () => {}, 
