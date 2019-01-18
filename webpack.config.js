@@ -10,9 +10,10 @@ module.exports = function (env, argv) {
 
   return {
     mode: environment,
+    devtool: isDev ? 'eval' : 'source-map',
     entry: './app/app.js',
     output: {
-      path: path.resolve(__dirname, 'app/dist'),
+      path: path.resolve(__dirname, 'app/dist'), 
       filename: 'app.bundle.js',
       publicPath: '/dist/',
     },
