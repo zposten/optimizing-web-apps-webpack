@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const noopPlugin = require('./config/webpack/noop-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = function (env, argv) {
@@ -36,7 +37,7 @@ module.exports = function (env, argv) {
     },
     plugins: [
       new CleanWebpackPlugin(['app/dist']),
-      isDev ? new webpack.HotModuleReplacementPlugin() : () => {}, 
+      isDev ? new webpack.HotModuleReplacementPlugin() : noopPlugin, 
     ],
     // Documented at: https://webpack.js.org/configuration/dev-server/
     devServer: {
