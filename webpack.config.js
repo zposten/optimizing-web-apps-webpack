@@ -20,15 +20,20 @@ module.exports = function (env, argv) {
           test: /\.js$/, 
           exclude: /(node_modules|bower_components)/,
           use: [
-            'tee-loader?label=AFTER', // Older query string syntax
-            {loader: 'babel-loader'},
-            {loader: 'tee-loader', options: {label: 'BEFORE'}}, // Current object syntax
+            /* Runs 3rd */'tee-loader?label=AFTER', // Older query string syntax
+            /* Runs 2nd */isDev ? 'noop-loader' : 'babel-loader',
+            /* Runs 1st */{loader: 'tee-loader', options: {label: 'BEFORE'}}, // Current object syntax
           ],
         },
       ],
     },
     resolveLoader: {
-      alias: {'tee-loader': path.resolve(__dirname, 'tee-loader.js')}
+      // Webpack doesn't know where to find the 'tee-loader' because it doesn't
+      // exist in node_modules.  So create an alias to specify it's location.
+      alias: {
+        'tee-loader': path.resolve(__dirname, 'config/webpack/tee-loader.js'),
+        'noop-loader': path.resolve(__dirname, 'config/webpack/noop-loader.js'),
+      }
     },
     plugins: [
       isDev ? new webpack.HotModuleReplacementPlugin() : () => {}, 
