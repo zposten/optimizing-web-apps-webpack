@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = function (env, argv) {
   const environment = env || 'development'
@@ -34,6 +35,7 @@ module.exports = function (env, argv) {
       }
     },
     plugins: [
+      new CleanWebpackPlugin(['app/dist']),
       isDev ? new webpack.HotModuleReplacementPlugin() : () => {}, 
     ],
     // Documented at: https://webpack.js.org/configuration/dev-server/
