@@ -1,4 +1,4 @@
-import './klondike/scoring'
+import 'tee-loader!./klondike/scoring'
 import './klondike/game'
 import './klondike/klondike'
 import './klondike/board'

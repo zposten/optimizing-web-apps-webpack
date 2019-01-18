@@ -20,9 +20,7 @@ module.exports = function (env, argv) {
           test: /\.js$/, 
           exclude: /(node_modules|bower_components)/,
           use: [
-            /* Runs 3rd */'tee-loader?label=AFTER', // Older query string syntax
-            /* Runs 2nd */isDev ? 'noop-loader' : 'babel-loader',
-            /* Runs 1st */{loader: 'tee-loader', options: {label: 'BEFORE'}}, // Current object syntax
+            isDev ? 'noop-loader' : 'babel-loader',
           ],
         },
       ],
